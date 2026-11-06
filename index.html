@@ -92,14 +92,30 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 .icon-btn svg, .booster-btn svg { width: 28px; height: 28px; fill: currentColor; stroke: currentColor; stroke-width: 1.2px; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4)); }
 .booster-count { position: absolute; bottom: 0px; right: -2px; background: var(--bg-main); color: var(--btn-color); font-size: 13px; font-weight: 900; width: 24px; height: 24px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--btn-color); text-shadow: 0px 1px 2px rgba(0,0,0,0.8); z-index: 10; }
 
-.bg-gradient { background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%); color: #495057; --bg-main: #f8f9fa; --btn-bg: #ced4da; --btn-color: #495057; --btn-active-bg: #adb5bd; }
-.bg-gradient #grid { background: #dee2e6; border: 3px solid #ced4da; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-.bg-gradient .cell { background: #f8f9fa; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+/* Новая ледяная тема (вместо старого Gradient) */
+.bg-gradient { 
+    background: linear-gradient(180deg, #e0f7fa 0%, #b2ebf2 100%); /* Ледяной голубой */
+    color: #006064; 
+    --bg-main: #e0f7fa; 
+    --btn-bg: #80deea; 
+    --btn-color: #006064; 
+    --btn-active-bg: #4dd0e1; 
+}
+.bg-gradient #grid { background: #b2ebf2; border: 3px solid #80deea; box-shadow: 0 8px 24px rgba(0, 150, 136, 0.2); }
+.bg-gradient .cell { background: #e0f7fa; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
 .bg-gradient #hud, .bg-gradient .icon-btn { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.05); }
-.bg-wood { background: #e2e8f0; color: #334155; --bg-main: #e2e8f0; --btn-bg: #cbd5e1; --btn-color: #334155; --btn-active-bg: #94a3b8; }
-.bg-wood #grid { background: #cbd5e1; border: 3px solid #94a3b8; box-shadow: 0 8px 24px rgba(100, 116, 139, 0.2); }
-.bg-wood .cell { background: #f1f5f9; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
-.bg-wood #hud, .bg-wood .icon-btn { background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.05); }
+/* Тема Stone (каменная) */
+.bg-wood { 
+    background: #d1d5db; /* Холодный серый камень */
+    color: #374151; 
+    --bg-main: #d1d5db; 
+    --btn-bg: #9ca3af; 
+    --btn-color: #111827; 
+    --btn-active-bg: #6b7280; 
+}
+.bg-wood #grid { background: #9ca3af; border: 3px solid #6b7280; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); }
+.bg-wood .cell { background: #e5e7eb; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+.bg-wood #hud, .bg-wood .icon-btn { background: rgba(255,255,255,0.4); border: 1px solid rgba(0,0,0,0.05); }
 .bg-dark { background: #1e1e24; color: #e2e8f0; --bg-main: #1e1e24; --btn-bg: #3a3a45; --btn-color: #ffffff; --btn-active-bg: #4d4d5a; }
 .bg-dark #grid { background: #121216; border: 3px solid #000; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
 .bg-dark .cell { background: #2e2e38; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
@@ -115,6 +131,27 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 .bg-neon .custom-select, .bg-neon .toggle-setting { background: #0d021a; border-color: #00e5ff; color: #00e5ff; }
 .bg-neon .btn-outline { border-color: #00e5ff; color: #00e5ff; }
 .bg-neon .settings-label, .bg-neon .toggle-setting span { color: #ff007f; }
+/* Делаем кнопки в Синтвейве заметнее */
+.bg-neon .booster-btn {
+    background: rgba(0, 229, 255, 0.15) !important; /* Легкая голубая заливка */
+    border: 1px solid rgba(0, 229, 255, 0.5) !important; /* Яркая обводка */
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3) !important; /* Легкое свечение */
+}
+/* --- СТИЛИ ДЛЯ КАМНЕЙ --- */
+.cell.stone.themed-stone {
+    background-color: rgba(120, 120, 120, 0.6) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+.bg-gradient .cell.stone.themed-stone,
+.bg-wood .cell.stone.themed-stone {
+    background-color: rgba(80, 80, 80, 0.8) !important;
+    border: 2px solid rgba(0, 0, 0, 0.3) !important;
+}
+.bg-dark .cell.stone.themed-stone {
+    background-color: rgba(160, 160, 160, 0.5) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
 </style>
 </head>
 <body class="bg-gradient">
@@ -288,8 +325,37 @@ function togglePause() { if (gameMode === 'menu') return; isPaused = !isPaused; 
 function updateUI() { scoreEl.innerText = score; if (gameMode === 'levels') { hudEl.style.display = 'flex'; levelEl.innerText = currentLevel; targetEl.innerText = targetScore; progressEl.style.width = Math.min((score / targetScore) * 100, 100) + '%'; document.getElementById('lbl-level').innerText = TRANSLATIONS[currentLang].level; } else if (gameMode === 'timeattack') { hudEl.style.display = 'flex'; document.getElementById('lbl-level').innerText = 'TIME'; levelEl.innerText = timeLeft; document.getElementById('lbl-target').innerText = 'MODE'; targetEl.innerText = 'SPEED'; progressEl.style.width = (timeLeft/60)*100 + '%'; } else { hudEl.style.display = 'none'; } }
 function getCellSize(){const s=getComputedStyle(gridEl);return (gridEl.offsetWidth-2*parseFloat(s.paddingLeft)-(SIZE-1)*parseFloat(s.gap))/SIZE;}
 function hexToRgba(h,a){return `rgba(${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)},${a})`;}
-function initGrid(){gridEl.innerHTML='';for(let r=0;r<SIZE;r++){for(let c=0;c<SIZE;c++){let d=document.createElement('div');d.className='cell';d.dataset.r=r;d.dataset.c=c;gridEl.appendChild(d);}}}
-function drawGrid(){document.querySelectorAll('.cell').forEach(cell=>{cell.classList.remove('clearing','line-preview','stone','filled');cell.style.backgroundColor='';cell.style.backgroundImage='';cell.style.opacity='1';cell.style.boxShadow='';let r=+cell.dataset.r,c=+cell.dataset.c;if(gridData[r][c]!==0){if(gridData[r][c]===STONE_COLOR){cell.classList.add('stone','filled');}else{cell.style.backgroundColor=gridData[r][c];cell.classList.add('filled');}}});}
+function initGrid(){
+    gridEl.innerHTML='';
+    for(let r=0;r<SIZE;r++){
+        for(let c=0;c<SIZE;c++){
+            let d=document.createElement('div');
+            d.className='cell';
+            d.dataset.r=r;
+            d.dataset.c=c;
+            gridEl.appendChild(d);
+        }
+    }
+}
+
+function drawGrid(){
+    document.querySelectorAll('.cell').forEach(cell=>{
+        cell.classList.remove('clearing','line-preview','stone','filled','themed-stone');
+        cell.style.backgroundColor='';
+        cell.style.backgroundImage='';
+        cell.style.opacity='1';
+        cell.style.boxShadow='';
+        let r=+cell.dataset.r,c=+cell.dataset.c;
+        if(gridData[r][c]!==0){
+            if(gridData[r][c]===STONE_COLOR){
+                cell.classList.add('stone','filled','themed-stone');
+            } else {
+                cell.style.backgroundColor=gridData[r][c];
+                cell.classList.add('filled');
+            }
+        }
+    });
+}
 function spawnStones(amount) { let placed=0; while(placed<amount){let r=Math.floor(Math.random()*SIZE);let c=Math.floor(Math.random()*SIZE);if(gridData[r][c]===0){gridData[r][c]=STONE_COLOR;placed++;}} drawGrid(); }
 function getRandomShape(forcedColor){
     let c = (forcedColor !== undefined) ? forcedColor : Math.floor(Math.random() * COLORS.length);

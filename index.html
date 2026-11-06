@@ -54,7 +54,23 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 #action-bar { display: flex; justify-content: center; gap: 15px; }.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 2000; padding: 20px; box-sizing: border-box; }
 .overlay.active { display: flex; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.game-over-card { background: #fbf9f4; border: 1px solid #e3ddcf; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); border-radius: 24px; padding: 40px 30px; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 360px; animation: cardPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; position: relative; color: #4a4a4a;}
+.game-over-card {
+    background: rgba(15, 12, 27, 0.85); /* Темный полупрозрачный фон */
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    border-radius: 24px; 
+    padding: 0px 30px 30px 30px; /* Убираем отступ сверху для картинки */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%; 
+    max-width: 360px; 
+    animation: cardPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+    position: relative; 
+    color: #ffffff; /* Белый текст для темного стекла */
+}
 @keyframes cardPop { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
 .game-title { font-family: 'Arial Black', Impact, sans-serif; font-size: clamp(40px, 9vw, 52px); line-height: 1.1; text-align: center; margin: 0 0 20px 0; background: linear-gradient(180deg, #ff8787, #f06595, #cc5de8); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 3px 0px rgba(0,0,0,0.1)) drop-shadow(0 6px 10px rgba(240, 101, 149, 0.2)); letter-spacing: 2px; font-weight: 900;}
 .win-title { background: linear-gradient(180deg, #8ce99a, #51cf66, #40c057); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 3px 0px rgba(0,0,0,0.1)) drop-shadow(0 6px 10px rgba(81, 207, 102, 0.2)); }
@@ -96,10 +112,14 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 }
 
 .logo-image {
-    width: 100%;
-    max-width: 100%; 
+    width: calc(100% + 60px); 
+    max-width: none; 
     height: auto;
-    display: block; /* Убираем лишние отступы снизу картинки */
+    margin-left: -30px; 
+    margin-right: -30px; 
+    margin-top: 0; 
+    display: block;
+    border-radius: 24px 24px 0 0; 
     animation: logoFloat 3s ease-in-out infinite;
 }
 .logo-text { font-family: 'Arial Black', Impact, sans-serif; font-size: 46px; font-weight: 900; letter-spacing: 3px; background: linear-gradient(180deg, #b3ffd9, #00ffcc, #00e5ff); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(0, 229, 255, 0.6); margin: -10px 0 0 0; z-index: 10; }
@@ -115,7 +135,7 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 /* Новая ледяная тема (вместо старого Gradient) */
 /* Тема Gradient (Жемчужно-серая) */
 .bg-gradient { 
-    background: linear-gradient(180deg, #f1f3f5 0%, #e2e6ea 100%); /* Нейтральный светло-серый */
+    background: linear-gradient(180deg, #f1f3f5 0%, #e2e6ea 100%); 
     color: #343a40; 
     --bg-main: #f1f3f5; 
     --btn-bg: #ced4da; 
@@ -125,9 +145,9 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 .bg-gradient #grid { background: #dee2e6; border: 3px solid #ced4da; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
 .bg-gradient .cell { background: #f8f9fa; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
 .bg-gradient #hud, .bg-gradient .icon-btn { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.05); }
-/* Тема Stone (каменная) */
+
 .bg-wood { 
-    background: #d1d5db; /* Холодный серый камень */
+    background: #d1d5db; 
     color: #374151; 
     --bg-main: #d1d5db; 
     --btn-bg: #9ca3af; 
@@ -137,27 +157,30 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 .bg-wood #grid { background: #9ca3af; border: 3px solid #6b7280; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); }
 .bg-wood .cell { background: #e5e7eb; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
 .bg-wood #hud, .bg-wood .icon-btn { background: rgba(255,255,255,0.4); border: 1px solid rgba(0,0,0,0.05); }
+
 .bg-dark { background: #1e1e24; color: #e2e8f0; --bg-main: #1e1e24; --btn-bg: #3a3a45; --btn-color: #ffffff; --btn-active-bg: #4d4d5a; }
 .bg-dark #grid { background: #121216; border: 3px solid #000; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
 .bg-dark .cell { background: #2e2e38; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
 .bg-dark #hud, .bg-dark .icon-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-.bg-dark .game-over-card { background: #2a2a35; border-color: #444; color: #e2e8f0; }
+.bg-dark .game-over-card { background: rgba(15, 12, 27, 0.85); border-color: rgba(255,255,255,0.1); color: #ffffff; }
 .bg-dark .custom-select, .bg-dark .toggle-setting { background: #1e1e24; border-color: #444; color: #e2e8f0; }
 .bg-dark .btn-outline { border-color: #444; color: #e2e8f0; }
+
 .bg-neon { background-color: #1a0b2e; background-image: linear-gradient(rgba(255, 0, 128, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 128, 0.1) 1px, transparent 1px); background-size: 30px 30px; color: #00e5ff; --bg-main: #1a0b2e; --btn-bg: rgba(0, 229, 255, 0.1); --btn-color: #00e5ff; --btn-active-bg: rgba(0, 229, 255, 0.25); }
 .bg-neon #grid { background: #090214; border: 3px solid #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); }
 .bg-neon .cell { background: #2b134d; box-shadow: inset 0 0 5px rgba(0, 229, 255, 0.2); }
 .bg-neon #hud, .bg-neon .icon-btn { background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); }
-.bg-neon .game-over-card { background: #150a27; border-color: #ff007f; box-shadow: 0 0 30px rgba(255, 0, 127, 0.2); color: #00e5ff; }
+.bg-neon .game-over-card { background: rgba(15, 12, 27, 0.85); border-color: #ff007f; box-shadow: 0 0 30px rgba(255, 0, 127, 0.2); color: #00e5ff; }
 .bg-neon .custom-select, .bg-neon .toggle-setting { background: #0d021a; border-color: #00e5ff; color: #00e5ff; }
 .bg-neon .btn-outline { border-color: #00e5ff; color: #00e5ff; }
 .bg-neon .settings-label, .bg-neon .toggle-setting span { color: #ff007f; }
-/* Делаем кнопки в Синтвейве заметнее */
+
 .bg-neon .booster-btn {
-    background: rgba(0, 229, 255, 0.15) !important; /* Легкая голубая заливка */
-    border: 1px solid rgba(0, 229, 255, 0.5) !important; /* Яркая обводка */
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3) !important; /* Легкое свечение */
+    background: rgba(0, 229, 255, 0.15) !important;
+    border: 1px solid rgba(0, 229, 255, 0.5) !important;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3) !important;
 }
+
 /* --- СТИЛИ ДЛЯ КАМНЕЙ --- */
 .cell.stone.themed-stone {
     background-color: rgba(120, 120, 120, 0.6) !important;

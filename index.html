@@ -80,15 +80,15 @@ body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;display:flex;fl
 .toggle-btn.on::after { transform: translateX(20px); }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-.logo-container { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; margin-bottom: 20px; margin-top: 5px; }
+.logo-container { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; margin-bottom: 15px; margin-top: 0px; animation: fadeInLogo 1s ease-out forwards; }
 .logo-image {
     width: 100%;
-    max-width: 260px; /* Размер картинки в меню */
+    /* Убираем ограничение по ширине, чтобы картинка растянулась */
+    max-width: 100%; 
     height: auto;
-    margin-bottom: 15px;
-    /* Оставляем только легкое парение */
+    margin-bottom: 20px;
     animation: logoFloat 3s ease-in-out infinite;
-    border-radius: 12px; /* Легкое скругление, чтобы черный фон смотрелся мягче */
+    border-radius: 16px; 
 }
 .logo-text { font-family: 'Arial Black', Impact, sans-serif; font-size: 46px; font-weight: 900; letter-spacing: 3px; background: linear-gradient(180deg, #b3ffd9, #00ffcc, #00e5ff); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(0, 229, 255, 0.6); margin: -10px 0 0 0; z-index: 10; }
 @keyframes logoFloat { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }

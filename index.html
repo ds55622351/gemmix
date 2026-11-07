@@ -5,16 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>GEMMIX</title>
 <style>
+html { 
+    height: 100%; 
+    overflow: hidden; 
+}
+
 body{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-evenly;
-    height:100dvh;
+    
+    /* Жестко фиксируем размеры на весь экран */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Убираем 100dvh, чтобы браузер не пересчитывал его на лету */
+    
     margin:0;
     overflow:hidden;
     touch-action:none;
+    overscroll-behavior: none; /* Запрещаем нативный скролл и "резинку" */
+    
     padding-top:15px;
     padding-bottom:max(15px, env(safe-area-inset-bottom));
     box-sizing:border-box;

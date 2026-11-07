@@ -374,9 +374,8 @@ function findBestFittingShape() {
 function spawnShapes(){
     let colorPool = [0, 1, 2, 3, 4, 5];
     for (let i = colorPool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [colorPool[i], colorPool[j]] = [colorPool[j], colorPool[i]]; }
-    let needed = findBestFittingShape();
     for(let i=0;i<3;i++){
-        if (i === 0 && needed !== null && Math.random() < 0.2) { shapes[i] = JSON.parse(JSON.stringify(needed)); shapes[i].color = colorPool[i]; } else { shapes[i] = getRandomShape(colorPool[i]); }
+        shapes[i] = getRandomShape(colorPool[i]);
         renderShape(i);
     }
     checkGameOver();
@@ -473,7 +472,10 @@ function tryPlace(s,r0,c0){
     cells.forEach(p=>{let cell=document.querySelector(`.cell[data-r="${p.r}"][data-c="${p.c}"]`);if(cell){cell.classList.add('placing');setTimeout(()=>cell.classList.remove('placing'),200);}});
     return true;
 }
-function spawnParticles(x, y, color) { let p = document.createElement('div'); p.className = 'particle'; p.style.left = x + 'px'; p.style.top = y + 'px'; p.style.backgroundColor = color; const angle = Math.random() * Math.PI * 2; const dist = 20 + Math.random() * 40; p.style.setProperty('--tx', Math.cos(angle) * dist + 'px'); p.style.setProperty('--ty', Math.sin(angle) * dist + 'px'); p.style.setProperty('--rot', (Math.random() * 360) + 'deg'); document.body.appendChild(p); setTimeout(() => p.remove(), 600); }
+function spawnParticles(x, y, color) { 
+    // Временно отключено для проверки бага
+    return; 
+}
 function checkLines(){
     if(isAnim)return false;
     let rows=[],cols=[];

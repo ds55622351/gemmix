@@ -84,16 +84,6 @@ body{
     transform: translate(-50%, -50%); 
     animation: floatUp 0.8s ease-out forwards; 
 }
-
-.particle { 
-    position: absolute; /* Теперь absolute, так как родитель - сетка */
-    width: 8px; 
-    height: 8px; 
-    border-radius: 2px; 
-    pointer-events: none; 
-    z-index: 9998; 
-    animation: explode 0.6s ease-out forwards; 
-}
 @keyframes floatUp { 0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); } 30% { opacity: 1; transform: translate(-50%, -80%) scale(1.2); } 100% { opacity: 0; transform: translate(-50%, -150%) scale(1); } }
 .cell.line-preview{box-shadow:0 0 15px 3px rgba(105,192,255,0.5),inset 0 0 10px rgba(105,192,255,0.3)!important;filter:brightness(1.05);z-index:8}
 @keyframes place{0%{transform:scale(0.4);opacity:0.5}50%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:1}}
@@ -253,6 +243,17 @@ body{
 .bg-dark .cell.stone.themed-stone {
     background-color: rgba(160, 160, 160, 0.5) !important;
     border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+/* Создаем изолированный слой для всех летающих эффектов */
+.particle, .score-popup {
+    position: fixed !important;
+    will-change: transform, opacity;
+    /* Выносим на отдельный слой видеокарты */
+    transform: translateZ(0); 
+    /* Запрещаем влиять на размеры документа */
+    contain: strict; 
+    pointer-events: none;
+    z-index: 9999;
 }
 </style>
 </head>
@@ -603,22 +604,20 @@ function tryPlace(s,r0,c0){
 function spawnParticles(x, y, color) { 
     let p = document.createElement('div'); 
     p.className = 'particle'; 
-    
-    // Считаем координаты относительно сетки, а не всего окна
-    let gridRect = gridEl.getBoundingClientRect();
-    p.style.left = (x - gridRect.left) + 'px'; 
-    p.style.top = (y - gridRect.top) + 'px'; 
-    
+    p.style.left = x + 'px'; 
+    p.style.top = y + 'px'; 
     p.style.backgroundColor = color; 
-    p.style.transform = 'translateZ(0)'; 
+    // Говорим браузеру, что элемент полностью независим
+    p.style.position = 'fixed';
+    p.style.willChange = 'transform, opacity';
+    
     const angle = Math.random() * Math.PI * 2; 
     const dist = 20 + Math.random() * 40; 
     p.style.setProperty('--tx', Math.cos(angle) * dist + 'px'); 
     p.style.setProperty('--ty', Math.sin(angle) * dist + 'px'); 
     p.style.setProperty('--rot', (Math.random() * 360) + 'deg'); 
     
-    gridEl.appendChild(p); // ДОБАВЛЯЕМ В СЕТКУ, А НЕ В BODY
-    
+    document.body.appendChild(p); 
     setTimeout(() => p.remove(), 600); 
 }
 function checkLines(){

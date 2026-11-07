@@ -50,8 +50,12 @@ body{
     aspect-ratio: 1/1; 
     height: auto; 
     box-sizing: border-box; 
-    /* Запрещаем сетке менять размер, пока внутри происходят анимации */
-    contain: layout paint;
+    
+    /* САМАЯ ЖЕСТКАЯ ИЗОЛЯЦИЯ */
+    contain: strict; 
+    /* strict = size layout paint style. 
+       Говорит браузеру: "Забудь про то, что внутри этой сетки. 
+       Её размеры и отрисовка не могут повлиять на что-либо снаружи". */
 }
 .cell { border-radius: 6px; transition: all 0.4s; }
 .cell.filled { border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.2); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); box-sizing: border-box; }

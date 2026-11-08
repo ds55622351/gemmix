@@ -270,10 +270,10 @@ const finalEl=document.getElementById('final-score'), winScoreEl=document.getEle
 const homeBtn = document.getElementById('home-btn'), settingsBtn = document.getElementById('settings-btn');
 
 function initAudio() { try { if (!audioCtx) { let AudioContext = window.AudioContext || window.webkitAudioContext; if (AudioContext) audioCtx = new AudioContext(); } if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); } catch(e) {} }
-function vibrateDevice(ms) { if (vibeEnabled && navigator.vibrate) { try { navigator.vibrate(ms); } catch(e) {} } }
+function vibrateDevice(ms) { return; /* отключено для теста */ }
 function playSynth(freq, type, time, vol, duration) { if (!audioCtx || !soundEnabled) return; try { const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type = type; osc.frequency.setValueAtTime(freq, time); gain.gain.setValueAtTime(vol, time); gain.gain.exponentialRampToValueAtTime(0.001, time + duration); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(time); osc.stop(time + duration); } catch(e) {} }
-function sfxPlace() { if(audioCtx){playSynth(600, 'sine', audioCtx.currentTime, 0.15, 0.1);} vibrateDevice(20); }
-function sfxClear() { if(audioCtx){playSynth(440, 'triangle', audioCtx.currentTime, 0.15, 0.2); setTimeout(()=>playSynth(554, 'triangle', audioCtx.currentTime, 0.15, 0.2),50); setTimeout(()=>playSynth(659, 'triangle', audioCtx.currentTime, 0.15, 0.3),100);} vibrateDevice([30, 50, 30]); }
+function sfxPlace() { return; /* отключено для теста */ }
+function sfxClear() { return; /* отключено для теста */ }
 function sfxWin() { if(audioCtx){playSynth(523, 'square', audioCtx.currentTime, 0.1, 0.2); setTimeout(()=>playSynth(659, 'square', audioCtx.currentTime, 0.1, 0.2),150); setTimeout(()=>playSynth(783, 'square', audioCtx.currentTime, 0.1, 0.4),300);} vibrateDevice([100, 50, 100]); }
 function sfxLose() { if(audioCtx){playSynth(300, 'sawtooth', audioCtx.currentTime, 0.1, 0.3); setTimeout(()=>playSynth(250, 'sawtooth', audioCtx.currentTime, 0.1, 0.4),250);} vibrateDevice([200, 100, 200]); }
 function sfxRotate() { if(audioCtx){playSynth(400, 'sine', audioCtx.currentTime, 0.1, 0.1); setTimeout(()=>playSynth(600, 'sine', audioCtx.currentTime, 0.1, 0.1), 50);} vibrateDevice(20); }
